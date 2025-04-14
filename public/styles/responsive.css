@@ -1,0 +1,185 @@
+/* Base styles voor mobile-first approach */
+:root {
+    --sidebar-width: 100%;
+    --insights-width: 100%;
+    --header-height: 60px;
+    --input-height: 60px;
+}
+
+/* Layout containers */
+.app-container {
+    display: grid;
+    height: 100vh;
+    grid-template-areas:
+        "header"
+        "main"
+        "input"
+        "sidebar"
+        "insights";
+    grid-template-rows: var(--header-height) 1fr var(--input-height) auto auto;
+}
+
+/* Sidebar styling */
+.sidebar {
+    grid-area: sidebar;
+    display: none; /* Verborgen op mobiel, wordt getoond via JavaScript */
+    width: 100%;
+    background: var(--sidebar-bg, #f8f9fa);
+    z-index: 100;
+}
+
+.sidebar.active {
+    display: block;
+    position: fixed;
+    top: var(--header-height);
+    bottom: 0;
+    left: 0;
+    width: 280px;
+    overflow-y: auto;
+}
+
+/* Header styling */
+.header {
+    grid-area: header;
+    padding: 0 1rem;
+}
+
+.mobile-menu-btn {
+    display: block;
+}
+
+/* Main chat area */
+.main {
+    grid-area: main;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+/* Input area */
+.input-area {
+    grid-area: input;
+    padding: 0.5rem;
+    background: var(--input-bg, white);
+    border-top: 1px solid var(--border-color, #eee);
+}
+
+/* Insights panel */
+.insights-panel {
+    grid-area: insights;
+    display: none; /* Verborgen op mobiel */
+    background: var(--insights-bg, #f8f9fa);
+}
+
+.insights-panel.active {
+    display: block;
+}
+
+/* Responsive message bubbles */
+.message {
+    max-width: 100%;
+    margin: 0.5rem 0;
+}
+
+.message-content {
+    padding: 0.75rem;
+    border-radius: 12px;
+    word-wrap: break-word;
+}
+
+/* Suggestion grid */
+.suggestion-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* Tablet breakpoint (768px) */
+@media (min-width: 768px) {
+    .app-container {
+        grid-template-areas:
+            "sidebar header header"
+            "sidebar main insights"
+            "sidebar input insights";
+        grid-template-columns: 280px 1fr 300px;
+        grid-template-rows: var(--header-height) 1fr var(--input-height);
+    }
+
+    .sidebar {
+        display: block;
+        position: static;
+    }
+
+    .mobile-menu-btn {
+        display: none;
+    }
+
+    .suggestion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .insights-panel {
+        display: block;
+        width: 300px;
+    }
+}
+
+/* Desktop breakpoint (1024px) */
+@media (min-width: 1024px) {
+    .suggestion-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .message {
+        max-width: 80%;
+    }
+
+    .insights-panel {
+        width: 350px;
+    }
+}
+
+/* Large desktop breakpoint (1440px) */
+@media (min-width: 1440px) {
+    .app-container {
+        grid-template-columns: 320px 1fr 400px;
+    }
+
+    .suggestion-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .insights-panel {
+        width: 400px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .chat-item,
+    .resource-link,
+    .message-action-btn {
+        cursor: default;
+    }
+
+    .input-area {
+        padding: 0.75rem;
+    }
+
+    .input-action-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --sidebar-bg: #1a1a1a;
+        --insights-bg: #1a1a1a;
+        --input-bg: #2d2d2d;
+        --border-color: #333;
+    }
+} 
