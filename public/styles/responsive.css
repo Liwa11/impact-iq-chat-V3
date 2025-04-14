@@ -1,9 +1,21 @@
 /* Base styles voor mobile-first approach */
 :root {
+    /* Layout variabelen */
     --sidebar-width: 100%;
     --insights-width: 100%;
     --header-height: 60px;
     --input-height: 60px;
+
+    /* Kleurenpalet (originele kleuren) */
+    --primary-bg: #ffffff;
+    --sidebar-bg: #f8fafc;
+    --insights-bg: #f8fafc;
+    --input-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --text-primary: #1a1a1a;
+    --text-secondary: #64748b;
+    --accent-color: #0ea5e9;
+    --hover-bg: #f1f5f9;
 }
 
 /* Layout containers */
@@ -17,6 +29,8 @@
         "sidebar"
         "insights";
     grid-template-rows: var(--header-height) 1fr var(--input-height) auto auto;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
 }
 
 /* Sidebar styling */
@@ -24,7 +38,8 @@
     grid-area: sidebar;
     display: none; /* Verborgen op mobiel, wordt getoond via JavaScript */
     width: 100%;
-    background: var(--sidebar-bg, #f8f9fa);
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
     z-index: 100;
 }
 
@@ -42,6 +57,8 @@
 .header {
     grid-area: header;
     padding: 0 1rem;
+    background: var(--primary-bg);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .mobile-menu-btn {
@@ -53,21 +70,23 @@
     grid-area: main;
     padding: 1rem;
     overflow-y: auto;
+    background: var(--primary-bg);
 }
 
 /* Input area */
 .input-area {
     grid-area: input;
     padding: 0.5rem;
-    background: var(--input-bg, white);
-    border-top: 1px solid var(--border-color, #eee);
+    background: var(--input-bg);
+    border-top: 1px solid var(--border-color);
 }
 
 /* Insights panel */
 .insights-panel {
     grid-area: insights;
     display: none; /* Verborgen op mobiel */
-    background: var(--insights-bg, #f8f9fa);
+    background: var(--insights-bg);
+    border-left: 1px solid var(--border-color);
 }
 
 .insights-panel.active {
@@ -174,12 +193,37 @@
     }
 }
 
-/* Dark mode support */
+/* Dark mode support - subtiele aanpassingen */
 @media (prefers-color-scheme: dark) {
     :root {
-        --sidebar-bg: #1a1a1a;
-        --insights-bg: #1a1a1a;
-        --input-bg: #2d2d2d;
-        --border-color: #333;
+        --primary-bg: #1e293b;
+        --sidebar-bg: #0f172a;
+        --insights-bg: #0f172a;
+        --input-bg: #1e293b;
+        --border-color: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #94a3b8;
+        --hover-bg: #334155;
+    }
+
+    /* Specifieke dark mode aanpassingen */
+    .message {
+        background-color: var(--sidebar-bg);
+    }
+
+    .suggestion-card {
+        background-color: var(--sidebar-bg);
+        border-color: var(--border-color);
+    }
+
+    .input-container {
+        background-color: var(--sidebar-bg);
+    }
+
+    /* Behoud lichte achtergrond voor invoervelden */
+    input, textarea {
+        background-color: var(--sidebar-bg);
+        color: var(--text-primary);
+        border-color: var(--border-color);
     }
 } 
