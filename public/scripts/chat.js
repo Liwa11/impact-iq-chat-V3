@@ -38,13 +38,7 @@ document.querySelector('.send').addEventListener('click', async () => {
   });
 
   // Stream reader om AI-respons op te bouwen
-  const reader = res.body.getReader();
-  const decoder = new TextDecoder();
-  let streamText = '';
-  while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      streamText += decoder.decode(value);
-      msgContent.textContent = streamText;
-  }
+  const data = await res.json();
+const answer = data.choices?.[0]?.message?.content || 'No response';
+msgContent.textContent = answer;
 });
