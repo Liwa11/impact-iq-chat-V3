@@ -23,6 +23,17 @@ document.querySelector('.send').addEventListener('click', async () => {
         body: JSON.stringify({ message: userMessage })
     });
 
+    await fetch('/api/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          role: 'user',
+          content: userMessage,
+          user_id: 'anonymous', // of later dynamisch
+        }),
+      });
+            
+
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let streamText = '';
