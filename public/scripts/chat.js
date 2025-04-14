@@ -75,12 +75,15 @@ async function sendMessage() {
 document.addEventListener('DOMContentLoaded', () => {
     // Bestaande chat.js code behouden...
 
-    // Profile button
-    const profileBtn = document.querySelector('.profile-button');
-    if (profileBtn) {
-        const initials = getInitials(window.userData.name);
-        profileBtn.textContent = initials;
-        profileBtn.addEventListener('click', () => {
+    // Profielknop functionaliteit
+    const profileButton = document.querySelector('.profile-button');
+    if (profileButton) {
+        // Update initialen
+        const userData = JSON.parse(localStorage.getItem('userData')) || window.DEFAULT_USER;
+        profileButton.textContent = getInitials(userData.name);
+        
+        // Click handler
+        profileButton.addEventListener('click', () => {
             window.location.href = '/profile.html';
         });
     }
