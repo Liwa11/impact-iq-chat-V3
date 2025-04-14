@@ -71,3 +71,123 @@ async function sendMessage() {
   // Scroll naar onder na antwoord
   messageArea.scrollTop = messageArea.scrollHeight;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Bestaande chat.js code behouden...
+
+    // Profile button
+    const profileBtn = document.querySelector('.profile-button');
+    if (profileBtn) {
+        const initials = getInitials(window.userData.name);
+        profileBtn.textContent = initials;
+        profileBtn.addEventListener('click', () => {
+            window.location.href = '/profile.html';
+        });
+    }
+
+    // New Chat button
+    const newChatBtn = document.querySelector('.new-chat-btn');
+    if (newChatBtn) {
+        newChatBtn.addEventListener('click', () => {
+            const chat = window.chatManager.createNewChat();
+            updateChatList();
+            clearChatWindow();
+        });
+    }
+
+    // Chat list functionality
+    function updateChatList() {
+        const chatHistory = document.querySelector('.chat-history');
+        if (!chatHistory) return;
+
+        chatHistory.innerHTML = window.chatManager.chats
+            .map(chat => `
+                <div class="chat-item" data-chat-id="${chat.id}">
+                    <div class="chat-icon">${chat.title[0]}</div>
+                    <div class="chat-info">
+                        <div class="chat-title">${chat.title}</div>
+                        <div class="chat-date">${new Date(chat.timestamp).toLocaleDateString()}</div>
+                    </div>
+                </div>
+            `).join('');
+
+        // Add click handlers
+        document.querySelectorAll('.chat-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const chatId = item.dataset.chatId;
+                loadChat(chatId);
+            });
+        });
+    }
+
+    // File upload
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.style.display = 'none';
+    document.body.appendChild(fileInput);
+
+    const attachBtn = document.querySelector('.attach');
+    if (attachBtn) {
+        attachBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+    }
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            alert(`Bestand geselecteerd: ${file.name}`);
+            // Later: upload via Supabase
+        }
+    });
+
+    // Speech-to-text
+    const micBtn = document.querySelector('.option-btn');
+    const messageInput = document.querySelector('.message-input');
+
+    if (micBtn && 'webkitSpeechRecognition' in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = 'nl-NL';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        micBtn.addEventListener('click', () => {
+            recognition.start();
+            micBtn.style.color = 'red';
+        });
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            messageInput.value = transcript;
+            micBtn.style.color = '';
+        };
+
+        recognition.onend = () => {
+            micBtn.style.color = '';
+        };
+    }
+
+    // Initialize
+    updateChatList();
+});
+
+// Helper functions
+function clearChatWindow() {
+    const main = document.querySelector('.main');
+    if (main) {
+        main.innerHTML = `
+            <div class="welcome-section">
+                <h2 class="welcome-title">Nieuwe Chat</h2>
+                <p class="welcome-subtitle">Start een nieuw gesprek met Impact IQ...</p>
+            </div>
+        `;
+    }
+}
+
+function loadChat(chatId) {
+    const chat = window.chatManager.loadChat(chatId);
+    if (chat) {
+        // Later: implement chat loading
+        console.log('Loading chat:', chat);
+    }
+}

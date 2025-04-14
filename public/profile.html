@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Profiel - Impact IQ</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        .profile-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .button-group button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .save-button {
+            background: #4CAF50;
+            color: white;
+        }
+        .logout-button {
+            background: #f44336;
+            color: white;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <a href="/" class="back-link">← Terug naar chat</a>
+        <h1>Mijn Profiel</h1>
+        <form id="profile-form">
+            <div class="form-group">
+                <label for="username">Naam</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="save-button">Opslaan</button>
+                <button type="button" class="logout-button">Uitloggen</button>
+            </div>
+        </form>
+    </div>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/profile.js"></script>
+</body>
+</html> 
