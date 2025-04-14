@@ -1,0 +1,14 @@
+{
+  "name": "impact-iq-chat",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "vercel build",
+    "start": "vercel start"
+  },
+  "dependencies": {
+  "openai": "^4.0.0",
+  "ai": "latest"
+},
+"type": "module"
+}
