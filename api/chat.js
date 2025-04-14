@@ -1,7 +1,8 @@
-export const config = { runtime: 'edge' };
+// verwijder deze regel:
+// export const config = { runtime: 'edge' };
 
-export default async function handler(req) {
-  const { messages } = await req.json();
+export default async function handler(req, res) {
+  const { messages } = req.body;
   const message = messages[messages.length - 1]?.content || "";
   const apiKey = process.env.OPENAI_API_KEY;
 
@@ -14,11 +15,10 @@ export default async function handler(req) {
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: message }],
-      stream: true
+      stream: false
     })
   });
 
-  return new Response(response.body, {
-    headers: { 'Content-Type': 'text/event-stream' }
-  });
+  const data = await response.json();
+  res.status(200).json(data);
 }
