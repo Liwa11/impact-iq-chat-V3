@@ -10,6 +10,15 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --iq-gradient: linear-gradient(90deg, #298C98 0%, #6BC6B8 100%);
+    --iq-primary: #298C98;
+    --iq-primary-light: #6BC6B8;
+    --iq-accent: #33C2B2;
+    --iq-bg: #EAF7F6;
+    --iq-sidebar: #F8FCFB;
+    --iq-text: #1A1A1A;
+    --iq-card-border: #298C98;
+    --iq-card-bg: #fff;
 }
 
 * {
@@ -618,3 +627,22 @@ body {
     box-sizing: border-box;
     transition: height 0.2s ease;
   }
+
+button,
+.input-action-btn,
+.new-chat-btn,
+.profile-button {
+  background: var(--iq-accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+button:hover,
+.input-action-btn:hover,
+.new-chat-btn:hover,
+.profile-button:hover {
+  background: #27a89e;
+}
