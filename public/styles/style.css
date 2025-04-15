@@ -21,6 +21,99 @@
     --iq-card-bg: #fff;
 }
 
+/* Algemene achtergrond en tekst */
+body, .main, .input-area {
+    background: var(--iq-bg);
+    color: var(--iq-text);
+}
+
+/* Header met gradient */
+.header {
+    background: var(--iq-gradient);
+    color: var(--iq-text);
+    box-shadow: 0 2px 8px rgba(41,140,152,0.08);
+}
+.header h1, .header .logo-icon {
+    color: var(--iq-text);
+}
+
+/* Sidebar */
+.sidebar {
+    background: var(--iq-sidebar);
+    color: var(--iq-text);
+    border-right: 1px solid #d1e7e5;
+}
+.sidebar h3 {
+    color: var(--iq-primary);
+    font-weight: 600;
+}
+.chat-item, .sidebar-section {
+    color: var(--iq-text);
+}
+
+/* Knoppen */
+button,
+.input-action-btn,
+.new-chat-btn,
+.profile-button {
+    background: var(--iq-accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5em 1.2em;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+button:hover,
+.input-action-btn:hover,
+.new-chat-btn:hover,
+.profile-button:hover {
+    background: #27a89e;
+}
+
+/* Chatbubbels */
+.message.user .message-content {
+    background: #fff;
+    color: var(--iq-text);
+    border-left: 4px solid var(--iq-primary);
+    box-shadow: 0 1px 4px rgba(41,140,152,0.06);
+}
+.message.assistant .message-content {
+    background: var(--iq-bg);
+    color: var(--iq-text);
+    border-left: 4px solid var(--iq-primary-light);
+    box-shadow: 0 1px 4px rgba(41,140,152,0.04);
+}
+
+/* Invoerveld */
+.input-container, .message-input {
+    background: #fff;
+    border: 1px solid #d1e7e5;
+    color: var(--iq-text);
+    border-radius: 8px;
+}
+
+/* Kaarten (cards) */
+.suggestion-card, .metric-card, .profile-container {
+    background: var(--iq-card-bg);
+    border-left: 6px solid var(--iq-card-border);
+    box-shadow: 0 2px 8px rgba(41,140,152,0.06);
+    color: var(--iq-text);
+}
+
+/* Grafieken/widgets */
+.chart-container, .progress-bar {
+    background: #d1f5ee;
+    border-radius: 8px;
+}
+.progress-fill {
+    background: linear-gradient(90deg, #33C2B2 0%, #6BC6B8 100%);
+}
+.metric-value {
+    color: #33C2B2;
+    font-weight: bold;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -627,22 +720,3 @@ body {
     box-sizing: border-box;
     transition: height 0.2s ease;
   }
-
-button,
-.input-action-btn,
-.new-chat-btn,
-.profile-button {
-  background: var(--iq-accent);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5em 1.2em;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-button:hover,
-.input-action-btn:hover,
-.new-chat-btn:hover,
-.profile-button:hover {
-  background: #27a89e;
-}
